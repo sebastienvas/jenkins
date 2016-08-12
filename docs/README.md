@@ -135,8 +135,8 @@ hardcoded in the Jenkinsfile.
     https://www.googleapis.com/auth/gerritcodereview,
     https://www.googleapis.com/auth/logging.write,
     https://www.googleapis.com/auth/projecthosting,
-    https://www.googleapis.com/auth/servicecontrol'
-    https://www.googleapis.com/auth/service.management,
+    https://www.googleapis.com/auth/servicecontrol,
+    https://www.googleapis.com/auth/service.management'
 
     $ gcloud container \
     --project "${PROJECT_ID}" \
@@ -155,6 +155,9 @@ hardcoded in the Jenkinsfile.
 You should be running this on Jenkins machine after cluster creation.
 
     # To ssh to jenkins
+    # Since version 121.0.0, gcloud container uses oauth2, but kubernetes
+    # plugin still uses legacy client certificate
+    $ gcloud config set container/use_client_certificate true
     $ gcloud compute ssh jenkins --project "${PROJECT_ID}" --zone "${ZONE}"
 
     # On Jenkins VM, sudo as jenkins
